@@ -12,10 +12,6 @@ async function getData() {
     if (!res.ok) {
         throw new Error("Failed to fetch API")
     }
-
-    if (res.headers.get("content-type") !== "application/json") {
-        return {items: [ await res.text() ]}
-    }
     return res.json()
     
 }
