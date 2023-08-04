@@ -8,14 +8,11 @@ import getDomain from "@/app/lib/getDomain";
 async function getData() {
     const domain = getDomain();
     const endpoint = `${domain}/api/posts`
-    const res = await fetch(endpoint);
+    const res = await fetch(endpoint, { cache: 'no-store' } );
     if (!res.ok) {
         throw new Error("Failed to fetch API")
     }
 
-    if (res.headers.get("content-type") !== "application/json") {
-        return {items: [ {id: 1, title: JSON.stringify(res) } ]}
-    }
     return res.json()
     
 }
