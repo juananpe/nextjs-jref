@@ -8,7 +8,7 @@ import getDomain from "@/app/lib/getDomain";
 async function getData() {
     const domain = getDomain();
     const endpoint = `/api/posts`
-    const res = await fetch(endpoint, { revalidate: 0 } );
+    const res = await fetch(endpoint);
     if (!res.ok) {
         throw new Error("Failed to fetch API")
     }
