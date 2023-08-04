@@ -14,7 +14,7 @@ async function getData() {
     }
 
     if (res.headers.get("content-type") !== "application/json") {
-        return {items: [ JSON.stringify(res) ]}
+        return {items: [ JSON.stringify(res.text) ]}
     }
     return res.json()
     
