@@ -14,7 +14,7 @@ async function getData() {
     }
 
     if (res.headers.get("content-type") !== "application/json") {
-        return {items: [ res.text() ]}
+        return {items: [ await res.text() ]}
     }
     return res.json()
     
