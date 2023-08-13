@@ -1,9 +1,6 @@
 import getDomain from "@/app/lib/getDomain";
 
-// fetch catching options
-// revalidate: n seconds
-// force-cache
-// no-store
+import BlogCard from "./card";
 
 async function getData() {
     const domain = getDomain();
@@ -14,14 +11,11 @@ async function getData() {
         throw new Error("Failed to fetch API")
     }
 
-    return res.json()
-    
+    return res.json()    
 }
 
 
-
 export default async function Page() {
-
     const data = await getData();
     const items = data?.items || [];
     return (
@@ -29,7 +23,7 @@ export default async function Page() {
         <h1>Hello World Page</h1>
         <p>Posts:</p>
         {items.map((item, idx) => {
-            return <li key={`post-${idx}`}>{item.title}</li>
+            return <BlogCard title={item.title} key={`post-${idx}`} />
         })}
         </main>
     );
