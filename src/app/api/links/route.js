@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import isValidURL from "@/app/lib/isValidUrl";
+import isValidURL from "@/app/lib/validURL";
 
 export async function POST(request){
     // using standard form data
@@ -12,6 +12,7 @@ export async function POST(request){
     }
     const data = await request.json()
     const url  = data?.url
+    console.log(process.env.NEXT_PUBLIC_VERCEL_URL)
     const validURL = await isValidURL(url, ['localhost','jref.io', process.env.NEXT_PUBLIC_VERCEL_URL])
     if (!validURL) {
         return NextResponse.json({ error: `Invalid URL ${url}`}, { status: 400 })   
