@@ -1,5 +1,14 @@
 import { NextResponse } from "next/server";
 import isValidURL from "@/app/lib/validURL";
+import {addLink} from "@/app/lib/db";
+
+import {getMinLinks} from '@/app/lib/db'
+
+export async function GET(request){
+    const linksResponse = await getMinLinks()
+    console.log(linksResponse )
+    return NextResponse.json(linksResponse, {status: 200});
+}
 
 export async function POST(request){
     // using standard form data
@@ -17,6 +26,6 @@ export async function POST(request){
     if (!validURL) {
         return NextResponse.json({ error: `Invalid URL ${url}`}, { status: 400 })   
     }
-
-    return NextResponse.json(data, {status: 201});
+    const dbResponse = await addLink(url)
+    return NextResponse.json(dbResponse, {status: 201});
 }
