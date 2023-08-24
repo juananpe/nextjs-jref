@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function LinksCreateForm() {
+export default function LinksCreateForm( {didSubmit} ) {
 
     const [results, setResults] = useState(null);
 
@@ -26,6 +26,9 @@ export default function LinksCreateForm() {
     const result = await res.json();
     console.log(result);
     setResults(result);
+
+    if (didSubmit) didSubmit(result)
+
   };
 
   return (

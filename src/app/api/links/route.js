@@ -5,7 +5,7 @@ import {addLink} from "@/app/lib/db";
 import {getMinLinks} from '@/app/lib/db'
 
 export async function GET(request){
-    const linksResponse = await getMinLinks()
+    const linksResponse = await getMinLinks(100, 0)
     console.log(linksResponse )
     return NextResponse.json(linksResponse, {status: 200});
 }
