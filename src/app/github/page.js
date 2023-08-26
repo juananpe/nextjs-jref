@@ -1,30 +1,23 @@
 'use client'
 
-import useWR from 'swr'
+import useSWR from 'swr'
 
-const fetcher = (url) => fetch(url).then((res) => res.json())
+const fetcher = (url) => fetch(url).then((res)=>res.json());
 
-export default function GitHubProfile() {
-    const myGitHubRepoProfile = "https://api.github.com/repos/juananpe/nextjs-jref"
-    const {data, error, isLoading} = useWR(myGitHubRepoProfile, fetcher)
-    
-    if (error) return <div>failed to load</div>
-    if (isLoading) return <div>loading...</div>
-    
+export default function GithubProfile() {
+    const myGithubRepoProfile = "https://api.github.com/repos/codingforentrepreneurs/jref.io"
+    const {data, error, isLoading} = useSWR(myGithubRepoProfile, fetcher)
+    if (error) return "An error happened"
+    if (isLoading) return "Loading..."
     return (
         <div>
             <h1>{data.name}</h1>
             <p>{data.description}</p>
-            <strong>
-            👀 {data.subscribers_count}
-            </strong>
-            <strong>
-            ⭐️   {data.stargazers_count}
-            </strong>
-            <strong>
-            🍴  {data.forks_count} 
-            </strong>
+            <strong>👁 {data.subscribers_count}</strong>{" "}
+            <strong>✨ {data.stargazers_count}</strong>{" "}
+            <strong>🍴 {data.forks_count}</strong>
         </div>
     )
+
 
 }
